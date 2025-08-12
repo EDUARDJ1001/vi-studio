@@ -76,9 +76,9 @@ export default function Page() {
                     <div className="flex h-16 items-center justify-between">
                         <div className="flex items-center gap-3">
                             <img
-                                src="/logo.png"
+                                src="/img/Logo.png"
                                 alt="VI Studio logo"
-                                className="h-9 w-auto select-none"
+                                className="h-16 w-auto select-none"
                             />
                             <span className="text-xl font-semibold tracking-tight">VI Studio</span>
                         </div>
@@ -449,10 +449,9 @@ export default function Page() {
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
                         <div className="flex items-center gap-2 text-sm text-slate-600">
-                            <img src="/logo.png" alt="VI Studio" className="h-6 w-auto" />
+                            <img src="/img/Logo.png" alt="VI Studio" className="h-12 w-auto" />
                             <span>© {new Date().getFullYear()} VI Studio. Todos los derechos reservados.</span>
                         </div>
-                        <div className="text-sm text-slate-500">Términos · Privacidad</div>
                         <p className="text-[11px] sm:text-xs text-gray-600 dark:text-gray-400 text-center sm:text-right">
                             Contáctanos por whatsapp{" "}
                             <a
