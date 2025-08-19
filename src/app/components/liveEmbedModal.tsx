@@ -50,15 +50,6 @@ export default function LiveEmbedModal({ isOpen, onClose, src }: Props) {
             <div className="flex items-center justify-between px-4 py-3 border-b">
               <h3 className="text-base font-semibold">Vista en directo</h3>
               <div className="flex items-center gap-2">
-                <a
-                  href={src}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="Abrir en nueva pestaña"
-                  className="inline-flex items-center gap-1 text-slate-500 hover:text-slate-800"
-                >
-                  <ExternalLink className="size-4" />
-                </a>
                 <button
                   onClick={onClose}
                   className="rounded-full p-1 text-slate-500 hover:bg-slate-100 hover:text-slate-800"
