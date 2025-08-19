@@ -5,13 +5,15 @@ import { motion } from "framer-motion";
 import Swal from "sweetalert2";
 import { ArrowRight, PlayCircle, Sparkles, PhoneCall, MapPin, Clock, Check, Send } from "lucide-react";
 import Image from "next/image";
+import LiveEmbedModal from "../components/liveEmbedModal";
 
-// If you place your logo in /public/logo.png, update the src below accordingly.
-// For now, we keep an <img> fallback to avoid Next/Image build issues in plain previews.
 
 export default function Page() {
     const [sending, setSending] = useState(false);
     const [sent, setSent] = useState(false);
+    const [showLive, setShowLive] = useState(false);
+    const LIVE_EMBED_URL =
+    process.env.NEXT_PUBLIC_LIVE_EMBED_URL ?? "https://rtsp.me/embed/azSe92GS/";
 
     const sectionVariants = {
         hidden: { opacity: 0, y: 24 },
@@ -130,8 +132,15 @@ export default function Page() {
                                     Cotiza gratis <ArrowRight className="size-4" />
                                 </a>
                                 <a href="#beneficios" className="inline-flex items-center justify-center gap-2 rounded-2xl border px-5 py-3 text-slate-900">
-                                    Ver cómo funciona <PlayCircle className="size-5" />
+                                    Ver beneficios
                                 </a>
+                                <button
+                                    type="button"
+                                    onClick={() => setShowLive(true)}
+                                    className="inline-flex items-center justify-center gap-2 rounded-2xl border px-5 py-3 text-slate-900"
+                                >
+                                    Vista en directo <PlayCircle className="size-5" />
+                                </button>
                             </div>
                             <div className="mt-6 flex items-center gap-6 text-xs text-slate-600">
                                 <div className="flex items-center gap-2"><Clock className="size-4" /> Spots de 15s</div>
@@ -337,8 +346,8 @@ export default function Page() {
                                 <a href="#contacto" className="inline-flex items-center gap-2 rounded-2xl bg-white px-5 py-3 text-slate-900">
                                     Escríbenos <Send className="size-4" />
                                 </a>
-                                <a href="tel:+50400000000" className="inline-flex items-center gap-2 rounded-2xl border border-white/40 px-5 py-3 text-white">
-                                    Llamar ahora <PhoneCall className="size-4" />
+                                <a href="https://wa.me/50493518861" className="inline-flex items-center gap-2 rounded-2xl border border-white/40 px-5 py-3 text-white">
+                                    Contactar ahora <PhoneCall className="size-4" />
                                 </a>
                             </div>
                         </div>
@@ -419,6 +428,23 @@ export default function Page() {
                                     <Send className="size-4" />
                                 </button>
                             </div>
+                            <div className="mt-6 items-center">
+                                <div className="mb-4 flex items-center gap-2 text-sm text-slate-500">
+                                    <hr className="border-slate-200" />
+                                    <span> Si prefieres, tambien puedes contactarnos por whatsapp</span>
+                                </div>
+                                <a
+                                    href="https://wa.me/50493518861"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-4 py-2 rounded-lg shadow-md transition-colors duration-300"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                                        <path d="M12 2a10 10 0 0 1 8.17 15.89c.17.3.15.66-.05.94l-2.32 3.85a1 1 0 0 1-1.33.3 1 1 0 0 1-.31-.3l-2.32-3.85a1 1 0 0 1-.05-.94A10 10 0 1 1 12 2zm0 1a9 9 0 1 0 7.36 14.15l.2.34.05.09.2.33 1.8 3.01-1.8-3-.2-.33-.05-.09-.2-.34A9 9 0 0 0 12 3zm3.5 10.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm-7 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+                                    </svg>
+                                    <span className="text-sm font-medium">WhatsApp: VI STUDIO</span>
+                                </a>
+                            </div>
                         </form>
 
                         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -447,25 +473,19 @@ export default function Page() {
             {/* FOOTER */}
             <footer className="border-t border-slate-100 py-8">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+                    <div className="flex flex-col items-center justify-center gap-4">
                         <div className="flex items-center gap-2 text-sm text-slate-600">
                             <img src="/img/Logo.png" alt="VI Studio" className="h-12 w-auto" />
                             <span>© {new Date().getFullYear()} VI Studio. Todos los derechos reservados.</span>
                         </div>
-                        <p className="text-[11px] sm:text-xs text-gray-600 dark:text-gray-400 text-center sm:text-right">
-                            Contáctanos por whatsapp{" "}
-                            <a
-                                href="https://wa.me/50493518861"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                            >
-                                VI STUDIO
-                            </a>
-                        </p>
                     </div>
                 </div>
             </footer>
+            <LiveEmbedModal
+                isOpen={showLive}
+                onClose={() => setShowLive(false)}
+                src={LIVE_EMBED_URL}
+            />
         </div>
     );
 }
